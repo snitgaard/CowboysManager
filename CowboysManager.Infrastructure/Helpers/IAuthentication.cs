@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CowboysManager.Infrastructure.Helpers
+{
+    public interface IAuthentication
+    {
+        public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt);
+        public bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt);
+    }
+}
