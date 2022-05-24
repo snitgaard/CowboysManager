@@ -66,7 +66,7 @@ namespace CowboysManager.Specflow.StepDefinitions
         [Then(@"The user is not presented with an error message")]
         public void ThenTheUserIsNotPresentedWithAnErrorMessage()
         {
-            Assert.Null(userResult);
+            Assert.Null(userResult); 
         } 
         [Given(@"I enter the an empty username '(.*)'")]
         public void GivenIEnterTheAnEmptyUsername(string username)
