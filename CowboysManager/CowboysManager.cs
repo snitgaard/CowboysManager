@@ -182,7 +182,15 @@ namespace CowboysManager
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt
             };
-            _userService.CreateUser(user);
+            try
+            {
+                _userService.CreateUser(user);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
             Console.WriteLine("Account registered. Please wait...");
             Thread.Sleep(2000);
             Login();

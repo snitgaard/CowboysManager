@@ -46,7 +46,11 @@ namespace CowboysManager.Core.Services
         }
         public bool IsValidUser(User user)
         {
-            return !string.IsNullOrEmpty(user.Username);
+            if(user.Username.Length < 16 || !string.IsNullOrEmpty(user.Username))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
