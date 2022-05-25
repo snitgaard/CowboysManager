@@ -73,6 +73,7 @@ namespace CowboysManager.UnitTests
         [Theory]
         [InlineData(1, null, "Password")] //Testing for missing username
         [InlineData(1, "", "Password")] //Testing for empty username
+        [InlineData(1, "UsernameIsTooLong", "Password")] //Testing for username length above 16
         public void CreateUserInvalid(int id, string username, string password)
         {
             UserService service = new UserService(repoMock.Object);
