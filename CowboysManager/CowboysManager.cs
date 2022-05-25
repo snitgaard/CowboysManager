@@ -71,6 +71,7 @@ namespace CowboysManager
 
         public void AddService()
         {
+            Console.Clear();
             Console.WriteLine("Enter the name of the Platform you would like to add ");
             string PlatformName = Console.ReadLine();
             Console.WriteLine("Enter Platform Username ");
@@ -88,7 +89,18 @@ namespace CowboysManager
                 EncryptedPassword = encryptedString,
                 UserId = loggedInUser.Id
             };
-            _platformService.CreatePlatform(platform);
+            try
+            {
+                _platformService.CreatePlatform(platform);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Thread.Sleep(1000);
+                AddService();
+            }
+
             Console.WriteLine("Platform created");
             Thread.Sleep(2000);
             Menu();
@@ -168,6 +180,7 @@ namespace CowboysManager
 
         public void Register()
         {
+            Console.Clear();
             Console.WriteLine("Username: ");
             var username = Console.ReadLine();
             Console.WriteLine("Password: ");
@@ -182,7 +195,17 @@ namespace CowboysManager
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt
             };
-            _userService.CreateUser(user);
+            try
+            {
+                _userService.CreateUser(user);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Thread.Sleep(1000);
+                Register();
+            }
+
             Console.WriteLine("Account registered. Please wait...");
             Thread.Sleep(2000);
             Login();
