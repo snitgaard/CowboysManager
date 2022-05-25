@@ -18,15 +18,20 @@ namespace CowboysManager.Specflow.StepDefinitions
 
         public PlatformSteps()
         {
+            var user = new User()
+            {
+                Id = 1,
+                Username = "Username1"
+            };
 
             var platforms = new List<Platform>
             {
-                new Platform {Id = 1, Username = "Username1", EncryptedPassword="JwATE5LBQlER7zp52OusptWaVUaQC5oq1GLE15bn7kg", Name = "YouTube", UserId = 1},
-                new Platform {Id = 2, Username = "Username2", EncryptedPassword="JwATE5LBQlER7zp52OusptWaVUaQC5oq1GLE15bn7kg", Name = "Facebook", UserId = 1}
+                new Platform {Id = 1, Username = "Username1", EncryptedPassword="JwATE5LBQlER7zp52OusptWaVUaQC5oq1GLE15bn7kg", Name = "YouTube", UserId = user.Id},
+                new Platform {Id = 2, Username = "Username2", EncryptedPassword="JwATE5LBQlER7zp52OusptWaVUaQC5oq1GLE15bn7kg", Name = "Facebook", UserId = user.Id}
             };
             repoMock = new Mock<IPlatformRepository<Platform>>();
 
-            repoMock.Setup(x => x.GetAllPlatforms()).Returns(platforms);
+            repoMock.Setup(x => x.GetAllPlatformsByUserId(user.Id)).Returns(platforms);
             platformService = new PlatformService(repoMock.Object);
         }
 
@@ -43,8 +48,8 @@ namespace CowboysManager.Specflow.StepDefinitions
             var platform = new Platform()
             {
                 Name = _platformName,
-                EncryptedPassword = "JwATE5LBQlER7zp52OusptWaVUaQC5oq1GLE15bn7kg",
                 Username = "Username1",
+                EncryptedPassword = "JwATE5LBQlER7zp52OusptWaVUaQC5oq1GLE15bn7kg",
                 UserId = 1
             };
 
