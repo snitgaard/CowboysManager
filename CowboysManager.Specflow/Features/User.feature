@@ -17,6 +17,11 @@ Scenario Outline: User doesnt exist
 
 @CreateUser_InvalidUsername_ExpectError
 Scenario Outline: Invalid username
-	Given I enter the an empty username ''
+	Given I enter the an empty username <username>
 	When I create the account
-	Then The user is presented with the error message 'Invalid user property'
+	Then The user is presented with the error message <error>
+
+	Examples: 
+	| username            | error                   |
+	| ''                  | 'Invalid user property' |
+	| 'UsernameIsTooLong' | 'Invalid user property' |

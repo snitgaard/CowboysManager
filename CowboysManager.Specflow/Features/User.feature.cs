@@ -167,15 +167,24 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Invalid username")]
+        [Xunit.SkippableTheoryAttribute(DisplayName="Invalid username")]
         [Xunit.TraitAttribute("FeatureTitle", "User")]
         [Xunit.TraitAttribute("Description", "Invalid username")]
         [Xunit.TraitAttribute("Category", "CreateUser_InvalidUsername_ExpectError")]
-        public virtual void InvalidUsername()
+        [Xunit.InlineDataAttribute("\'\'", "\'Invalid user property\'", new string[0])]
+        [Xunit.InlineDataAttribute("\'UsernameIsTooLong\'", "\'Invalid user property\'", new string[0])]
+        public virtual void InvalidUsername(string username, string error, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
+            string[] @__tags = new string[] {
                     "CreateUser_InvalidUsername_ExpectError"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("username", username);
+            argumentsOfScenario.Add("error", error);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid username", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 19
 this.ScenarioInitialize(scenarioInfo);
@@ -198,13 +207,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 20
- testRunner.Given("I enter the an empty username \'\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given(string.Format("I enter the an empty username {0}", username), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 21
  testRunner.When("I create the account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 22
- testRunner.Then("The user is presented with the error message \'Invalid user property\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("The user is presented with the error message {0}", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
