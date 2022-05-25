@@ -23,13 +23,13 @@ namespace CowboysManager.Core.Services
             {
                 throw new ArgumentException("Platform is missing");
             }
+            if (_platformRepo.GetAllPlatformsByUserId(platform.UserId).FirstOrDefault(p => p.Name == platform.Name) != null)
+            {
+                throw new InvalidOperationException("This Platform already exists");
+            }
             if (!IsValidPlatform(platform))
             {
                 throw new InvalidOperationException("Invalid platform property");
-            }
-            if (_platformRepo.GetAllPlatformsByUserId(platform.UserId).FirstOrDefault(p => p.Name == platform.Name) != null)
-            {
-                throw new InvalidOperationException("Platform already exists");
             }
             return _platformRepo.CreatePlatform(platform);
         }

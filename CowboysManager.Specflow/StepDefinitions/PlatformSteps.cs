@@ -21,7 +21,7 @@ namespace CowboysManager.Specflow.StepDefinitions
 
             var platforms = new List<Platform>
             {
-                new Platform {Id = 1, Username = "Username1", EncryptedPassword="JwATE5LBQlER7zp52OusptWaVUaQC5oq1GLE15bn7kg", Name = "Youtube", UserId = 1},
+                new Platform {Id = 1, Username = "Username1", EncryptedPassword="JwATE5LBQlER7zp52OusptWaVUaQC5oq1GLE15bn7kg", Name = "YouTube", UserId = 1},
                 new Platform {Id = 2, Username = "Username2", EncryptedPassword="JwATE5LBQlER7zp52OusptWaVUaQC5oq1GLE15bn7kg", Name = "Facebook", UserId = 1}
             };
             repoMock = new Mock<IPlatformRepository<Platform>>();
@@ -42,8 +42,10 @@ namespace CowboysManager.Specflow.StepDefinitions
         {
             var platform = new Platform()
             {
-                Id = 1,
                 Name = _platformName,
+                EncryptedPassword = "JwATE5LBQlER7zp52OusptWaVUaQC5oq1GLE15bn7kg",
+                Username = "Username1",
+                UserId = 1
             };
 
             try
@@ -58,13 +60,13 @@ namespace CowboysManager.Specflow.StepDefinitions
             }
         }
 
-        [Then(@"I am presented with the error message '([^']*)'")]
-        public void ThenIAmPresentedWithTheErrorMessage(string errorMessage)
+        [Then(@"I am presented with the error message '(.*)'")]
+        public void ThenIAmPresentedWithTheErrorMessage(string expectedError)
         {
-            Assert.Equal(errorMessage, _actualException.Message);
+            Assert.Equal(expectedError, _actualException.Message);
         }
 
-        [Given(@"I enter the platform name '([^']*)' that doesnt exist")]
+        [Given(@"I enter the platform name '(.*)' that doesnt exist")]
         public void GivenIEnterThePlatformNameThatDoesntExist(string platformName)
         {
             _platformName = platformName;

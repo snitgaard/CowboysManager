@@ -24,17 +24,17 @@ namespace CowboysManager.Core.Services
             {
                 throw new ArgumentException("User is missing");
             }
-            if (!IsValidUser(user))
-            {
-                throw new ArgumentException("Invalid user property");
-            }
             if (_userRepo.GetAllUsers().FirstOrDefault(u => u.Username == user.Username) != null)
             {
                 throw new InvalidOperationException("This User already exists");
             }
+            if (!IsValidUser(user))
+            {
+                throw new ArgumentException("Invalid user property");
+            }
+
             return _userRepo.CreateUser(user);
         }
-
         public IEnumerable<User> GetAllUsers()
         {
             var users = _userRepo.GetAllUsers();
@@ -46,11 +46,11 @@ namespace CowboysManager.Core.Services
         }
         public bool IsValidUser(User user)
         {
-            if(user.Username.Length < 16 || !string.IsNullOrEmpty(user.Username))
+            if(!string.IsNullOrEmpty(user.Username) && user.Username.Length <= 16)
             {
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
     }
 }

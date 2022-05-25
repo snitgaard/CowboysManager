@@ -7,7 +7,7 @@
 Scenario Outline: Platform already exists
 	Given I enter the platform name 'YouTube' that already exists
 	When I create the platform
-	Then I am presented with the error message 'This User already exists'
+	Then I am presented with the error message 'This Platform already exists'
 
 @CreatePlatform_NonExistingPlatform_ExpectNoError
 Scenario Outline: User doesnt exist

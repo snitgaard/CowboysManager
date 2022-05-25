@@ -118,7 +118,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("I create the platform", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 10
- testRunner.Then("I am presented with the error message \'This User already exists\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I am presented with the error message \'This Platform already exists\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
