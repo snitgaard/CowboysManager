@@ -10,7 +10,7 @@ namespace CowboysManager.Core.Services
 {
     public class UserService : IUserService
     {
-        //UserRepository _userRepo = new UserRepository();
+
         private readonly IUserRepository<User> _userRepo;
 
         public UserService(IUserRepository<User> userRepo)

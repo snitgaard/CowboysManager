@@ -15,16 +15,17 @@ namespace CowboysManager
         //private static UserService userService = new UserService();
         private readonly IUserService _userService;
         private readonly IPlatformService _platformService;
-        private Authentication authentication = new Authentication();
+        private readonly IAuthentication _authService;
         private Encryption encryption = new Encryption();
         private User loggedInUser;
         
         private int incrementalDelay = 1000;
         private int delay;
-        public CowboysManager(IUserService userService, IPlatformService platformService)
+        public CowboysManager(IUserService userService, IPlatformService platformService, IAuthentication authentcation)
         {
             _userService = userService;
             _platformService = platformService;
+            _authService = authentcation;
 
 
             Console.WriteLine("1: Login");
@@ -164,7 +165,7 @@ namespace CowboysManager
                 Thread.Sleep(1000);
                 Login();
             }
-            if (authentication.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            if (_authService.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
             {
                 loggedInUser = user;
                 Console.WriteLine("Logging in...");
@@ -189,15 +190,8 @@ namespace CowboysManager
             Console.WriteLine("Password: ");
             var password = Console.ReadLine();
 
-            byte[] passwordHash, passwordSalt;
-            authentication.CreatePasswordHash(password, out passwordHash, out passwordSalt);
-
-            var user = new User()
-            {
-                Username = username,
-                PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
-            };
+            User user = _authService.PasswordHasher(username, password);
+            
             try
             {
                 _userService.CreateUser(user);

@@ -1,6 +1,7 @@
 ﻿using CowboysManager.Core.Entities;
 using CowboysManager.Core.Interfaces;
 using CowboysManager.Core.Services;
+using CowboysManager.Infrastructure.Helpers;
 using CowboysManager.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,6 +24,7 @@ namespace CowboysManager
             services.AddSingleton<IUserRepository<User>, UserRepository>();
             services.AddSingleton<IPlatformService, PlatformService>();
             services.AddSingleton<IPlatformRepository<Platform>, PlatformRepository>();
+            services.AddSingleton<IAuthentication, AuthService>();
 
         }
     }
