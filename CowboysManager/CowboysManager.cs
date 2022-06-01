@@ -18,7 +18,9 @@ namespace CowboysManager
         private Authentication authentication = new Authentication();
         private Encryption encryption = new Encryption();
         private User loggedInUser;
-        public long userid;
+        
+        private int incrementalDelay = 1000;
+        private int delay;
         public CowboysManager(IUserService userService, IPlatformService platformService)
         {
             _userService = userService;
@@ -150,7 +152,6 @@ namespace CowboysManager
         {
             Console.Clear();
             Console.WriteLine("Please log in. ");
-
             Console.WriteLine("Username: ");
             var username = Console.ReadLine();
             Console.WriteLine("Password: ");
@@ -173,7 +174,9 @@ namespace CowboysManager
             else
             {
                 Console.WriteLine("Incorrect username or password. Please try again");
-                Thread.Sleep(1000);
+                delay = incrementalDelay * 2;
+                incrementalDelay = delay;
+                Thread.Sleep(incrementalDelay);
                 Login();
             }
         }
