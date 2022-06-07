@@ -46,7 +46,7 @@ namespace CowboysManager.Core.Services
         }
         public bool IsValidUser(User user)
         {
-            if(!string.IsNullOrEmpty(user.Username) && user.Username.Length <= 16)
+            if(!string.IsNullOrEmpty(user.Username) && user.Username.Length <= 16 && user.Password.Length >= 8)
             {
                 return true;
             }

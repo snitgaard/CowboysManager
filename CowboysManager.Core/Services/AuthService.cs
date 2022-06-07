@@ -49,6 +49,7 @@ namespace CowboysManager.Core.Services
             var user = new User()
             {
                 Username = username,
+                Password = password,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt
             };
